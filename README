@@ -15,3 +15,24 @@ and place it in your java classpath (/Library/Java/Extensions/ on OSX). This is 
 to estabish a local instance of DynamoDB table used for running unit tests.
 
 2. An IDE to run the java project. Import it as a maven project.
+
+
+Assumptions and workflow
+1. An agent can continuously make calls.
+2. The client/lambda handler should retry when the PowerDialer cannot find any AVAILABLE leads.
+3. A lead by default is assigned to "NONE" agent.
+4. An agent login action results in putting 2 AVAILABLE leads in his calling queue.
+5. The leads placed in an Agent's calling queue cannot be picked up by any other agent unless abandoned by the assignee.
+6. Whenever a call starts, an agent transitions into ENGAGED status and the lead status turns to ENGAGED
+7. Whenever a call completes, the power dialer:
+ - Marks the lead as COMPLETE
+ - Dials the next call in agent's queue
+ - Actively looks for any AVAILABLE leads and assigns it to the agent under QUEUED status.
+8. Whenever a call fails, the power dialer:
+- Resets the status of lead to AVAILABLE so that it becomes available in the pool
+- Unassigns the agent from it
+- Dials the next call in agent's queue
+- Actively looks for any AVAILABLE leads and assigns it to the agent under QUEUED status.
+9. When an agent logs out, the Power dialer ensures that he is not ENGAGED in a call or else fails the action. 
+If the agent is not ENGAGED in a call, the power dialer resets all the leads in the Agent's queue and marks the
+Agent status as OFF_DUTY

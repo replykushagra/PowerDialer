@@ -30,6 +30,7 @@ public class PowerDialerDaoImpl implements PowerDialerDao {
     final static DynamoDBMapperConfig READ_CONFIG = DynamoDBMapperConfig.ConsistentReads.CONSISTENT.config();
     final static DynamoDBMapperConfig WRITE_CONFIG = DynamoDBMapperConfig.SaveBehavior.UPDATE.config();
 
+    // In Production, use dependency injection(Guice/Spring/Dagger) to inject a singleton bean of this object
     @NonNull private final DynamoDBMapper dynamoDBMapper;
 
     @Override

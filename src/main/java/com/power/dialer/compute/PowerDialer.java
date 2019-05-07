@@ -3,7 +3,9 @@ package com.power.dialer.compute;
 import com.power.dialer.exception.AgentSessionTerminationException;
 
 /*
- * The PowerDialer interface allows us to perform agent actions
+ * The PowerDialer interface allows us to perform agent actions. Ideally it should be hooked up
+ * with a lambda handler which listens to the user actions and performs retries/error handling
+ * for the APIs implemented here
  */
 public interface PowerDialer {
 

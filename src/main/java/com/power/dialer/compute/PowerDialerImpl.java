@@ -12,12 +12,15 @@ import com.power.dialer.model.Lead;
 import com.power.dialer.model.Lead.LeadStatus;
 
 import lombok.AllArgsConstructor;
+import lombok.NonNull;
 
 @AllArgsConstructor
 public class PowerDialerImpl implements PowerDialer {
 
     private static final String DEFAULT_AGENT = "NONE";
-    private final PowerDialerDao powerDialerDao;
+
+    // In Production, use dependency injection(Guice/Spring/Dagger) to inject a singleton bean of this object
+    @NonNull private final PowerDialerDao powerDialerDao;
 
     @Override
     public void onAgentLogin(final String agentId) {

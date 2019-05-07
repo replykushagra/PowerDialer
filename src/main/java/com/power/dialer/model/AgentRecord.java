@@ -7,17 +7,21 @@ import com.power.dialer.model.Agent.AgentStatus;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 @Builder(toBuilder = true)
 @AllArgsConstructor
+@NoArgsConstructor
+@Data
 @DynamoDBTable(tableName = "agent")
 public class AgentRecord {
 
     public static final String PARTITION_KEY_ATTRIBUTE_NAME = "agentId";
 
     @NonNull private String agentId;
-    @NonNull private String status;
+    @NonNull private String agentStatus;
 
     @DynamoDBHashKey(attributeName = PARTITION_KEY_ATTRIBUTE_NAME)
     public String getAgentId() {
@@ -25,14 +29,14 @@ public class AgentRecord {
     }
 
     @DynamoDBAttribute
-    public String getStatus() {
-        return this.status;
+    public String getAgentStatus() {
+        return this.agentStatus;
     }
 
     public Agent toAgent() {
         return Agent.builder()
             .agentId(this.getAgentId())
-            .status(AgentStatus.valueOf(this.getStatus()))
+            .agentStatus(AgentStatus.valueOf(this.getAgentStatus()))
             .build();
     }
 }

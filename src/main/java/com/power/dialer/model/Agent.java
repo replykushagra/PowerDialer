@@ -8,10 +8,10 @@ import lombok.Value;
 @Value
 public class Agent {
 
-    /* AVAILABLE: When an agent who is logged in and is ready to make a call
+    /* AVAILABLE: When an agent is logged in and is ready to accept a call
      * WAITING_TO_BE_ENGAGED: When an agent is waiting for call to be picked up
      * ENGAGED: When an agent is engaged in a call
-     * OFF_DUTY: When an agent is not current active
+     * OFF_DUTY: When an agent is not currently active
      */
     public enum AgentStatus {
         AVAILABLE,
@@ -23,12 +23,12 @@ public class Agent {
     @NonNull
     private String agentId;
     @NonNull
-    private AgentStatus status;
+    private AgentStatus agentStatus;
 
     public AgentRecord toRecord() {
         return AgentRecord.builder()
             .agentId(this.agentId)
-            .status(this.status.toString())
+            .agentStatus(this.agentStatus.toString())
             .build();
     }
 }

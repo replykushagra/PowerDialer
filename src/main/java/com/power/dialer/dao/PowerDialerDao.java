@@ -1,5 +1,7 @@
 package com.power.dialer.dao;
 
+import java.util.List;
+
 import com.power.dialer.model.Agent;
 import com.power.dialer.model.Lead;
 
@@ -25,6 +27,13 @@ public interface PowerDialerDao {
      * @return next Lead
      */
     Lead getNextLead(final String agentId);
+
+    /**
+     * Return all the leads in the Agent's queue
+     * @param agentId agent id
+     * @return all leads in Agent's queue
+     */
+    List<Lead> getAllLeads(final String agentId);
 
     /**
      * Returns the next phone number to dial

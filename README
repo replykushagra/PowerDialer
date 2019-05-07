@@ -8,7 +8,7 @@ This increases the Agent Utilization (% of time the agent is on a call)
 while maintaining a small Abandon Rate (% calls abandoned because no agent was
 available to take it)
 
-What do I need ?
+How do I run it?
 
 1. Download sqllite4java-282.zip from https://bitbucket.org/almworks/sqlite4java/downloads/
 and place it in your java classpath (/Library/Java/Extensions/ on OSX). This is needed
